@@ -1,0 +1,23 @@
+.module{
+    color: white;
+    padding: 15px;
+    margin: 18px;
+    border: 1px white solid;
+    border-radius: 5px;
+}
+
+.module:hover{
+    color: black;
+    background-color: white;
+}
+
+.module_heading{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.circle_down{
+    font-size: larger;
+}
