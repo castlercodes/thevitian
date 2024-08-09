@@ -1,16 +1,44 @@
-"use client"
-import React from 'react'
-import Image from 'next/image';
+"use client";
+import React, { useEffect, useState } from 'react';
 import Post from './Post';
-import "./style/Feed.css"
+import "./style/Feed.css";
+import { db } from '@/lib/firebase'; // Import your firebase config
+import { collection, getDocs } from "firebase/firestore";
 
 function Feed() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "posts"));
+        const postsData = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setPosts(postsData);
+      } catch (error) {
+        console.error("Error fetching posts: ", error);
+      }
+    };
+
+    fetchPosts();
+  }, []);
 
   return (
     <div className="feed">
-      <Post content={"Code Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students club"} title={"GDSC event"} description={"Code Conquest Event going to be conducted by google developer students club"} author_name={"Jeevan Alexen"}/>
+      {posts.map((post) => (
+        <Post
+          key={post.id}
+          title={post.title}
+          description={post.description}
+          content={post.content}
+          author_name={post.author_name}
+          url = {post.photoUrl}
+        />
+      ))}
     </div>
-  )
+  );
 }
 
-export default Feed
+export default Feed;

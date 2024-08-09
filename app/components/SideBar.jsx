@@ -33,9 +33,9 @@ function SideBar() {
         :
         <div className="closed_side_bar" onClick={toggleSidebar}> 
             <div> <GoSidebarExpand /> </div>
-            <div onClick={goToHome}> <MdHome /> </div>
-            <div onClick={goToNotes}> <FaBook/> </div>
-            <div> <IoIosStats /> </div>
+            <div className="icon" onClick={goToHome}> <MdHome /> </div>
+            <div className="icon" onClick={goToNotes}> <FaBook/> </div>
+            <div className="icon"> <IoIosStats /> </div>
         </div>
       }
     </div>

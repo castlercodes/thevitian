@@ -1,0 +1,23 @@
+.navbar{
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    border-bottom: 1px whitesmoke solid;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.website_name{
+    font-size: 20px;
+}
+
+.login_button{
+    border: 1px white solid;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.login_button:hover{
+    background-color: red;
+    border: 1px black solid;
+}
