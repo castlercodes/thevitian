@@ -33,7 +33,7 @@ const ViewPostContent = () => {
       <div className={styles.title}>{post.title}</div>
       <div className={styles.description}>{post.description}</div>
       <div className={styles.image}><img src={post.photoUrl}/></div>
-      <div className={styles.content} dangerouslySetInnerHTML={{ __html: post.content }} />
+      <div className={styles.content} dangerouslySetInnerHTML={{ __html: post.content}} />
     </div>
   );
 }
