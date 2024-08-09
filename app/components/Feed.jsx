@@ -33,7 +33,10 @@ function Feed() {
           title={post.title}
           description={post.description}
           content={post.content}
-          author_name={post.author_name}
+          author_name={post.uploader}
+          time= {post.createdAt}
+          likes={post.likes}
+          dislikes={post.dislikes}
           url = {post.photoUrl}
         />
       ))}

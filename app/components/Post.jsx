@@ -2,7 +2,7 @@ import React from 'react';
 import "./style/Post.css";
 import { useRouter } from 'next/navigation';
 
-function Post({ author_name, title, description, content, url }) {
+function Post({author_name, title, description, content, url }) {
 
   const router = useRouter();
 

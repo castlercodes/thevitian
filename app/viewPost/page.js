@@ -1,10 +1,10 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { db } from '@/lib/firebase';
 import { collection, query, where, getDocs } from "firebase/firestore";
 
-const ViewPost = () => {
+const ViewPostContent = () => {
   const searchParams = useSearchParams();
   const [post, setPost] = useState(null);
   
@@ -33,6 +33,14 @@ const ViewPost = () => {
       <p>{post.description}</p>
       <div dangerouslySetInnerHTML={{ __html: post.content }} />
     </div>
+  );
+}
+
+const ViewPost = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ViewPostContent />
+    </Suspense>
   );
 }
 
