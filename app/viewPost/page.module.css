@@ -1,0 +1,58 @@
+.view_post{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 40px;
+}
+
+.title{
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.description{
+    font-size: 16px;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+.image{
+    height: 400px;
+}
+
+.image img{
+    height: 100%;
+}
+
+.content{
+    font-size: 14px;
+}
+
+@media (max-width: 800px){
+    .view_post{
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .title{
+        font-size: 16px;
+    }
+
+    .description{
+        font-size: 10px;
+        font-style: italic;
+        opacity: 0.8;
+    }
+
+    .image{
+        height: 400px;
+    }
+
+    .image img{
+        height: 100%;
+    }
+
+    .content{
+        font-size: 12px;
+    }
+}

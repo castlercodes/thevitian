@@ -3,6 +3,7 @@ import React, { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { db } from '@/lib/firebase';
 import { collection, query, where, getDocs } from "firebase/firestore";
+import styles from "./page.module.css"
 
 const ViewPostContent = () => {
   const searchParams = useSearchParams();
@@ -28,10 +29,11 @@ const ViewPostContent = () => {
   if (!post) return <div>Loading...</div>;
 
   return (
-    <div>
-      <h1>{post.title}</h1>
-      <p>{post.description}</p>
-      <div dangerouslySetInnerHTML={{ __html: post.content }} />
+    <div className={styles.view_post}>
+      <div className={styles.title}>{post.title}</div>
+      <div className={styles.description}>{post.description}</div>
+      <div className={styles.image}><img src={post.photoUrl}/></div>
+      <div className={styles.content} dangerouslySetInnerHTML={{ __html: post.content }} />
     </div>
   );
 }
