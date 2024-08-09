@@ -1,0 +1,54 @@
+.tiptap-editor-container {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: black;
+    color: white;
+  }
+  
+  .tiptap-toolbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .tiptap-toolbar-btn {
+    padding: 8px 12px;
+    background-color: black;
+    color: white;
+    border: 1px white solid;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .tiptap-toolbar-btn:hover {
+    background-color: #007BFF;
+    border: none;
+  }
+  
+  .tiptap-toolbar-btn.active {
+    background-color: red;
+    border: none;
+  }
+  
+  .tiptap-editor-content {
+    padding: 10px;
+    border: 0;
+    border-radius: 4px;
+    background-color: black;
+    color: white;
+    min-height: 200px; /* Ensure there's space to see content */
+  }
+  
+  /* Target the ProseMirror editor content */
+  .ProseMirror {
+    background-color: black;
+    color: white;
+    border: none; /* Ensure no border */
+    caret-color: white; /* Ensure the cursor is visible */
+    outline: none; /* Remove any default outline */
+    min-height: 200px; /* Ensure there's space for typing */
+  }
+  

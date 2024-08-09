@@ -1,6 +1,6 @@
 "use client"
 import {useState} from 'react'
-import "./SideBar.css"
+import "./style/SideBar.css"
 import { GoSidebarCollapse, GoSidebarExpand} from "react-icons/go";
 import { MdHome } from "react-icons/md";
 import { FaBook } from "react-icons/fa";

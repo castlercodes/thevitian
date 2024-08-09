@@ -1,0 +1,18 @@
+.create_post_button{
+    padding: 18px;
+    border-radius: 10px;
+    border: 1px white solid;
+    width: 30%;
+    align-self: center;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.create_post_button:hover{
+    background-color: whitesmoke;
+    color: black;
+    border: 1px red solid;
+}

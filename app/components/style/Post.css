@@ -1,0 +1,36 @@
+.post{
+    display: flex;
+    flex-direction: row;
+    border: 1px gray solid;
+    padding: 10px;
+    border-radius: 6px;
+    justify-content: space-between;
+}
+
+.post_first{
+    flex: 1.5;
+}
+
+.post_title{
+    font-size: 22px;
+}
+
+.post_description{
+    font-size: 14px;
+    opacity: 0.7;
+    width: 100%;
+}
+
+.post_image_div{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    height: 250px;
+    width: 100%;
+
+}
+
+.post_image{
+    width: 100%;
+    object-fit: contain;
+}

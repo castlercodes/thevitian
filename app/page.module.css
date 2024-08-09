@@ -1,0 +1,17 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+
+.main_home_section{
+    display: flex;
+}
+
+.feed{
+    flex: 3;
+}
+
+.profile{
+    flex: 1;
+}
