@@ -69,7 +69,7 @@
 
 @media (max-width: 800px){
     .post{
-        width: 90%;
+        width: 100%;
     }
 
     .author_name{

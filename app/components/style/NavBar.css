@@ -5,6 +5,7 @@
     border-bottom: 1px whitesmoke solid;
     justify-content: space-between;
     align-items: center;
+    margin: 5px;
 }
 
 .website_name{
@@ -20,4 +21,11 @@
 .login_button:hover{
     background-color: red;
     border: 1px black solid;
+}
+
+@media (max-width:800px){
+    .navbar{
+        font-size: 12px;
+        padding: 10px;
+    }
 }

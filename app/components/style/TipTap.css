@@ -13,13 +13,13 @@
   }
   
   .tiptap-toolbar-btn {
-    padding: 8px 12px;
+    font-size: 13px;
+    padding: 0px 4px;
     background-color: black;
     color: white;
     border: 1px white solid;
     border-radius: 4px;
     cursor: pointer;
-    font-weight: bold;
     transition: background-color 0.3s, transform 0.2s;
   }
   

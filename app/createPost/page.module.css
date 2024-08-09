@@ -75,3 +75,15 @@
     background-color: #0070f3;
   }
   
+@media (max-width: 800px){
+  .blog-page{
+    font-size: 12px;
+    width: 350px;
+    padding: 0;
+  }
+
+  .form-group{
+    padding: 2px;
+    width: 100%;
+  }
+}
