@@ -19,7 +19,8 @@ function Post({author_name, title, description, content, url, likes, dislikes, t
     <div className="post" onClick={expandPost}>
       <div className="details">
         <div className="author_name"> Posted by {author_name} </div>
-        <div className="likes">{likes}</div>
+        <div className="likes">Likes: {likes}</div>
+        <div className="dislikes">Dislikes: {dislikes} </div>
         <div className="upload_date">Upload Date: {time.toDate().getDate()} / {time.toDate().getMonth() + 1} / {time.toDate().getFullYear()}</div>
 
       </div>

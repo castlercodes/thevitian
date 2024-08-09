@@ -72,11 +72,31 @@
         width: 80%;
     }
 
+    .author_name{
+        font-size: 12px;
+    }
+
     .main_post{
         flex-direction: column;
     }
+    
+    .post_title{
+        font-size: 18px;
+    }
+
+    .post_description{
+        font-size: 14px;
+    }
+
+    .post_content{
+        font-size: 16px;
+    }
 
     .likes{
+        display: none;
+    }
+
+    .dislikes{
         display: none;
     }
 
