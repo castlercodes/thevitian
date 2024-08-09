@@ -8,7 +8,7 @@ function Feed() {
 
   return (
     <div className="feed">
-      <Post title={"GDSC event"} description={"Code Conquest Event going to be conducted by google developer students club"}/>
+      <Post content={"Code Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students clubCode Conquest Event going to be conducted by google developer students club"} title={"GDSC event"} description={"Code Conquest Event going to be conducted by google developer students club"} author_name={"Jeevan Alexen"}/>
     </div>
   )
 }

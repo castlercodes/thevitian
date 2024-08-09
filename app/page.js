@@ -9,7 +9,7 @@ export default function Home() {
       <CreatePostButton />
       <div className={styles.main_home_section}>
         <div className={styles.feed}><Feed /></div>
-        <div className={styles.profile}> </div>
+        <div className={styles.profile}></div>
       </div>
     </main>
   );
