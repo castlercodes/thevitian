@@ -1,5 +1,5 @@
 import React from 'react'
-import Module from '@/app/components/Module'
+import Module from '@/app/components/Module.jsx'
 
 function page() {
   return (
