@@ -9,6 +9,11 @@
     cursor: pointer;
 }
 
+.details{
+    display: flex;
+    justify-content: space-between;
+}
+
 .author_name{
     font-size: 14px;
     font-style: italic;
@@ -63,7 +68,19 @@
 }
 
 @media (max-width: 600px){
+    .post{
+        width: 80%;
+    }
+
     .main_post{
         flex-direction: column;
+    }
+
+    .likes{
+        display: none;
+    }
+
+    .upload_date{
+        display: none;
     }
 }

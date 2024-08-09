@@ -2,7 +2,7 @@ import React from 'react';
 import "./style/Post.css";
 import { useRouter } from 'next/navigation';
 
-function Post({author_name, title, description, content, url }) {
+function Post({author_name, title, description, content, url, likes, dislikes, time}) {
 
   const router = useRouter();
 
@@ -19,6 +19,9 @@ function Post({author_name, title, description, content, url }) {
     <div className="post" onClick={expandPost}>
       <div className="details">
         <div className="author_name"> Posted by {author_name} </div>
+        <div className="likes">{likes}</div>
+        <div className="upload_date">Upload Date: {time.toDate().getDate()} / {time.toDate().getMonth() + 1} / {time.toDate().getFullYear()}</div>
+
       </div>
       <div className="main_post">
         <div className="post_first">
