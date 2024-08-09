@@ -1,5 +1,5 @@
 import React from 'react'
-import "./Module.css";
+import "./style/Module.css";
 import { FaChevronCircleDown } from "react-icons/fa";
 import { FaAtom } from "react-icons/fa";
 
