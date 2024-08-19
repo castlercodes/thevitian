@@ -1,3 +1,4 @@
+"use client"
 import React from 'react';
 import "./style/Post.css";
 import { useRouter } from 'next/navigation';
@@ -12,7 +13,7 @@ function Post({author_name, title, description, content, url, likes, dislikes, t
 
   const expandPost = () => {
     const formattedTitle = formatTitleForUrl(title);
-    router.push(`/viewPost?title=${formattedTitle}`);
+    router.push(`${formattedTitle}`);
   }
 
   return (
@@ -21,7 +22,7 @@ function Post({author_name, title, description, content, url, likes, dislikes, t
         <div className="author_name"> Posted by {author_name} </div>
         <div className="likes">Likes: {likes}</div>
         <div className="dislikes">Dislikes: {dislikes} </div>
-        <div className="upload_date">Upload Date: {time.toDate().getDate()} / {time.toDate().getMonth() + 1} / {time.toDate().getFullYear()}</div>
+        {/* <div className="upload_date">Upload Date: {time.toDate().getDate()} / {time.toDate().getMonth() + 1} / {time.toDate().getFullYear()}</div> */}
 
       </div>
       <div className="main_post">

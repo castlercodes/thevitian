@@ -1,3 +1,6 @@
 .feed{
-    width: 90%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0px;
 }

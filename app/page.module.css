@@ -3,19 +3,20 @@
     flex-direction: column;
     padding: 30px;
     align-items: center;
-    width: 90%;
+    width: 100%;
 }
 
 .main_home_section{
     display: flex;
+    justify-content: center;
 }
 
 .feed{
-    flex: 3;
+    /* flex: 3; */
 }
 
 .profile{
-    flex: 1;
+    /* flex: 1; */
 }
 
 

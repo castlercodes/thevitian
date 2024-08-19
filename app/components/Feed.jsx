@@ -1,29 +1,25 @@
-"use client";
-import React, { useEffect, useState } from 'react';
-import Post from './Post';
-import "./style/Feed.css";
-import { db } from '@/lib/firebase'; // Import your firebase config
-import { collection, getDocs } from "firebase/firestore";
+// /app/feed/page.js
+import React from 'react';
+import Post from '@/app/components/Post'; // Adjust import as needed
+import './style/Feed.css'; // Ensure the correct path to your CSS
 
-function Feed() {
-  const [posts, setPosts] = useState([]);
+export const dynamic = 'force-dynamic'; // Enable dynamic rendering
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, "posts"));
-        const postsData = querySnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-        setPosts(postsData);
-      } catch (error) {
-        console.error("Error fetching posts: ", error);
-      }
-    };
+async function fetchPosts() {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`);
+    if (!res.ok) {
+      throw new Error('Failed to fetch posts');
+    }
+    return await res.json();
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    return [];
+  }
+}
 
-    fetchPosts();
-  }, []);
+export default async function Feed() {
+  const posts = await fetchPosts();
 
   return (
     <div className="feed">
@@ -34,14 +30,12 @@ function Feed() {
           description={post.description}
           content={post.content}
           author_name={post.uploader}
-          time= {post.createdAt}
+          time={post.createdAt}
           likes={post.likes}
           dislikes={post.dislikes}
-          url = {post.photoUrl}
+          url={post.photoUrl}
         />
       ))}
     </div>
   );
 }
-
-export default Feed;
