@@ -2,6 +2,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import SideBar from "./components/SideBar";
 import NavBar from "./components/NavBar";
+import { Suspense } from "react"
+import Loading from "./loading";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +20,7 @@ export default function RootLayout({ children }) {
           <NavBar />
           <div style={{display: "flex", flexDirection: "row"}}>
             <div><SideBar /></div>
-            <div style={{flex: 1}}>{children}</div>
+            <div style={{flex: 1}}><Suspense fallback={<Loading />}> {children} </Suspense></div>
           </div>
         </div>
       </body>
