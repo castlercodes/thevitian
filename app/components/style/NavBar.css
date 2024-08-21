@@ -28,4 +28,8 @@
         font-size: 12px;
         padding: 10px;
     }
+
+    .user_name{
+        display: none;
+    }
 }

@@ -6,7 +6,7 @@ import { useForm, Controller } from 'react-hook-form';
 import styles from "./page.module.css";
 import { FaRegArrowAltCircleRight, FaRegArrowAltCircleLeft } from "react-icons/fa";
 import { db } from '@/lib/firebase'; 
-import { collection, addDoc, getDocs } from "firebase/firestore"; 
+import { collection, addDoc, getDocs, getDoc, doc } from "firebase/firestore"; 
 import CourseCard from '../components/CourseCard';
 
 const schema = z.object({
@@ -59,6 +59,15 @@ function Page() {
       console.error("Error adding document: ", e);
       alert("Error adding course: " + e.message);
     }
+
+    const storedUser = sessionStorage.getItem("user");
+    const parsedUser = JSON.parse(storedUser);
+
+    const userRef = doc(db, "users", parsedUser.id);
+    const userDoc = await getDoc(userRef);
+
+    sessionStorage.setItem("user", JSON.stringify({displayName: userDoc.data().displayName, points: userDoc.data().points + 10, email: userDoc.data().email, id: userDoc.data().id }));
+    setShowPreview(false);
   };
 
   const handleMove = () => {
@@ -133,11 +142,9 @@ function Page() {
 
       <div className={styles.course_list}>
         {courses.length > 0 ? (
-          <ul>
-            {courses.map((course, index) => (
+            courses.map((course, index) => (
                 <CourseCard key={index} course={course}/>
-            ))}
-          </ul>
+            ))
         ) : (
           <p>Loading Courses</p>
         )}

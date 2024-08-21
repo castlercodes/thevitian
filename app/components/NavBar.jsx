@@ -1,10 +1,13 @@
 "use client";
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from "react";
 import "./style/NavBar.css";
-import { auth, GoogleAuthProvider, signInWithPopup } from "@/lib/firebase"
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import { auth, GoogleAuthProvider, signInWithPopup, db } from "@/lib/firebase";
+import { FaMoneyBillAlt } from "react-icons/fa";
 
 function NavBar() {
   const [currUser, setCurrUser] = useState("");
+  const [currPoints, setCurrPoints] = useState(0);
 
   useEffect(() => {
     const storedUser = sessionStorage.getItem("user");
@@ -12,6 +15,7 @@ function NavBar() {
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
       setCurrUser(parsedUser.displayName);
+      setCurrPoints(parsedUser.points)
     } 
   }, []);
 
@@ -20,18 +24,33 @@ function NavBar() {
 
     try {
       const result = await signInWithPopup(auth, provider);
-      const user = result.user.displayName;
-      const email = result.user.email;
+      const user = result.user;
+      const email = user.email;
 
-      // Check if email domain is allowed
       if (email.endsWith("@vitstudent.ac.in") || email.endsWith("@vitbhopal.ac.in")) {
-        console.log("Login successful:", user);
-        // Store user information in local storage or session storage
-        sessionStorage.setItem("user", JSON.stringify(result.user));
-        setCurrUser(user);
+        console.log("Login successful:", user.displayName);
+
+        const userRef = doc(db, "users", user.uid);
+        const userDoc = await getDoc(userRef);
+
+        if (!userDoc.exists()) {
+          await setDoc(userRef, {
+            displayName: user.displayName,
+            email: user.email,
+            points: 50,
+          });
+          sessionStorage.setItem("user", JSON.stringify({displayName: user.displayName, points: user.points, email: user.email, id: user.uid }));
+          setCurrPoints(50);
+        } else {
+          setCurrPoints(userDoc.data().points);
+          sessionStorage.setItem("user", JSON.stringify({displayName: user.displayName, points: userDoc.data().points, email: user.email, id: user.uid }));
+        }
+
+        setCurrUser(user.displayName);
+
       } else {
         alert("Access restricted to VIT students only.");
-        await auth.signOut(); // Sign out the user if not allowed
+        await auth.signOut();
       }
     } catch (error) {
       console.error("Login failed:", error);
@@ -42,23 +61,26 @@ function NavBar() {
     await auth.signOut();
     sessionStorage.removeItem("user");
     setCurrUser("");
-  }
+    setCurrPoints(0);
+  };
 
   return (
     <div className="navbar">
-        <div className="website_name">The Vitian</div>
-        {currUser === "" ?
-          (
-          <div className="login_button" onClick={handleLogin}> Login In </div>
-          ):(
-          <div style={{display: "flex", gap:"10px", alignItems:"center"}}>
-            <div>Hello {currUser} </div>
-            <div className="login_button" onClick={handleLogOut}>Sign Out </div>
+      <div className="website_name">The Vitian</div>
+      {currUser === "" ? (
+        <div className="login_button" onClick={handleLogin}>Login</div>
+      ) : (
+        <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <FaMoneyBillAlt style={{ marginRight: "5px" }} /> 
+            <div>{currPoints}</div>
           </div>
-          )
-        }
+          <div className="user_name">Hello {currUser}</div>
+          <div className="login_button" onClick={handleLogOut}>Sign Out</div>
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
-export default NavBar
+export default NavBar;
