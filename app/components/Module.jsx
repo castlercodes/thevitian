@@ -16,7 +16,7 @@ function Module({module_number, module_name}) {
   return (
     <div className="module" onClick = {handleWindowClick}>
       <div className="module_heading">
-        <div> Module {module_number} {module_name} </div>
+        <div> Module {module_number + 1} {module_name} </div>
         <div style={{display:`${window_display}`}} className="circle_down"> <FaChevronCircleDown /> </div>
         <div style={{display:`${window_display == "none" ? "" : "none"}`}} className="circle_down"> <FaChevronCircleUp /> </div>
       </div>

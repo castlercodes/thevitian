@@ -1,0 +1,7 @@
+.course_card{
+    padding: 20px;
+    border: 1px white solid;
+    width: fit-content;
+    border-radius: 8px;
+    cursor: pointer;
+}

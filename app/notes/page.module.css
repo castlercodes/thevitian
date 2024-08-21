@@ -23,11 +23,21 @@
 
 .form {
     display: flex; 
+    flex-direction: column;
     gap: 10px;
     padding: 5px;
     border-radius: 6px;
     align-items: center;
     width: fit-content;
+    border-left: 1px white solid;
+    border-right: 1px white solid;
+}
+
+.form_input{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    flex-direction: row;
 }
 
 .form input {
@@ -46,6 +56,26 @@
     border: none;
     border-radius: 4px;
     color: white;
+}
+
+.error_message{
+    
+}
+
+.preview{
+    gap: 10px;
+}
+
+.course_list{
+    padding: 15px;
+}
+
+.preview button{
+    background-color: red;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
 }
 
 @media (max-width: 800px) {
