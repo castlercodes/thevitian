@@ -28,6 +28,7 @@ function Page() {
       courseName: '',
       courseCode: '',
       moduleNames: Array(7).fill(''), 
+      uploadedUser: currUser,
     },
   });
 
@@ -70,7 +71,7 @@ function Page() {
       }
       const newPoints = currUser.points + 10;
 
-      const userRef = doc(db, "users", currUser.id); // Reference to the user's document
+      const userRef = doc(db, "users", currUser.id);
   
       try {
         await updateDoc(userRef, {
