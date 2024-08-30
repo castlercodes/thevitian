@@ -1,11 +1,17 @@
 "use client"
-
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect} from 'react';
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [currUser, setCurrUser] = useState(JSON.parse(sessionStorage.getItem('user')) || {});
+    const [currUser, setCurrUser] = useState({});
+
+    useEffect(() => {
+        const storedUser = sessionStorage.getItem('user');
+        if (storedUser) {
+        setCurrUser(JSON.parse(storedUser));
+        }
+    }, []);  
 
   return (
     <UserContext.Provider value={{ currUser, setCurrUser }}>
