@@ -33,6 +33,12 @@
     border-right: 1px white solid;
 }
 
+
+.form_content{
+    display: flex;
+    align-items: center;
+}
+
 .form_input{
     display: flex;
     gap: 5px;
@@ -58,6 +64,11 @@
     color: white;
 }
 
+.navigate_arrow{
+    font-size: 22px;
+    cursor: pointer;
+}
+
 .error_message{
     
 }
@@ -80,6 +91,12 @@
     border: none;
     border-radius: 5px;
     font-size: 14px;
+}
+
+.preview_buttons{
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
 }
 
 @media (max-width: 800px) {
@@ -111,5 +128,15 @@
     .form button {
         padding: 3px;
         font-size: 12px;
+    }
+
+    .preview_buttons button{
+        margin-top: 5px;
+        padding: 5px;
+        font-size: 11px;
+    }
+
+    .navigate_arrow{
+        font-size: 18px;
     }
 }

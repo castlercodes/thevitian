@@ -4,9 +4,10 @@ import "./style/NavBar.css";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { auth, GoogleAuthProvider, signInWithPopup, db } from "@/lib/firebase";
 import { FaMoneyBillAlt } from "react-icons/fa";
+import { useUser } from "../store/UserProvider";
 
 function NavBar() {
-  const [currUser, setCurrUser] = useState("");
+  const {currUser, setCurrUser} = useUser();
   const [currPoints, setCurrPoints] = useState(0);
 
   useEffect(() => {
@@ -14,7 +15,7 @@ function NavBar() {
     
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
-      setCurrUser(parsedUser.displayName);
+      setCurrUser(parsedUser);
       setCurrPoints(parsedUser.points)
     } 
   }, []);
@@ -43,10 +44,10 @@ function NavBar() {
           setCurrPoints(50);
         } else {
           setCurrPoints(userDoc.data().points);
-          sessionStorage.setItem("user", JSON.stringify({displayName: user.displayName, points: userDoc.data().points, email: user.email, id: user.uid }));
+          sessionStorage.setItem("user", JSON.stringify({displayName: user.displayName, points: userDoc.data().points, email: userDoc.data().email, id: user.uid }));
         }
 
-        setCurrUser(user.displayName);
+        setCurrUser(user);
 
       } else {
         alert("Access restricted to VIT students only.");
@@ -60,22 +61,23 @@ function NavBar() {
   const handleLogOut = async () => {
     await auth.signOut();
     sessionStorage.removeItem("user");
-    setCurrUser("");
+    setCurrUser({});
     setCurrPoints(0);
   };
 
   return (
     <div className="navbar">
       <div className="website_name">The Vitian</div>
-      {currUser === "" ? (
+      {Object.keys(currUser).length == 0 ? (
         <div className="login_button" onClick={handleLogin}>Login</div>
       ) : (
         <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
           <div style={{ display: "flex", alignItems: "center" }}>
             <FaMoneyBillAlt style={{ marginRight: "5px" }} /> 
-            <div>{currPoints}</div>
+            <div>{currUser.points}</div>
           </div>
-          <div className="user_name">Hello {currUser}</div>
+          {console.log(currUser)}
+          <div className="user_name">Hello {currUser.displayName}</div>
           <div className="login_button" onClick={handleLogOut}>Sign Out</div>
         </div>
       )}
