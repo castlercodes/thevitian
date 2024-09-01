@@ -8,7 +8,6 @@
 
   function NavBar() {
     const {currUser, setCurrUser} = useUser();
-    const [currPoints, setCurrPoints] = useState(0);
 
     useEffect(() => {
       const storedUser = sessionStorage.getItem("user");
@@ -16,9 +15,12 @@
       if (storedUser) {
         const parsedUser = JSON.parse(storedUser);
         setCurrUser(parsedUser);
-        setCurrPoints(parsedUser.points)
       } 
     }, []);
+
+    useEffect(() => {
+
+    }, [currUser])
 
     const handleLogin = async () => {
       const provider = new GoogleAuthProvider();
@@ -41,13 +43,14 @@
               points: 50,
             });
             sessionStorage.setItem("user", JSON.stringify({displayName: user.displayName, points: user.points, email: user.email, id: user.uid }));
-            setCurrPoints(50);
           } else {
-            setCurrPoints(userDoc.data().points);
             sessionStorage.setItem("user", JSON.stringify({displayName: user.displayName, points: userDoc.data().points, email: userDoc.data().email, id: user.uid }));
           }
 
-          setCurrUser(user);
+          const storedUser = sessionStorage.getItem("user");
+
+          const parsedUser = JSON.parse(storedUser);
+          setCurrUser(parsedUser);
 
         } else {
           alert("Access restricted to VIT students only.");
@@ -62,7 +65,6 @@
       await auth.signOut();
       sessionStorage.removeItem("user");
       setCurrUser({});
-      setCurrPoints(0);
     };
 
     return (

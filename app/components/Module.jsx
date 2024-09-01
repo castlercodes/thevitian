@@ -88,6 +88,10 @@ function Module({ module_number, module_name, db, currUser, setCurrUser }) {
     setShowPreview(false);
   };
 
+  // useEffect(() => {
+  //   const getNotes = ()
+  // }, [])
+
   return (
     <div className="module">
       <div className="module_heading" onClick={handleWindowClick}>
