@@ -6,22 +6,24 @@
     border-radius: 5px;
 }
 
-.module:hover{
-    color: black;
-    background-color: white;
-}
-
 .module_heading{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 10px;
 }
 
+.module_heading:hover{
+    
+}
+
+
 .notes-upload{
-    background-color: coral;
+    border: 1px white solid;
     padding: 6px;
     border-radius: 8px;
+    background-color:rgb(36, 38, 39);
 }
 
 .notes{
@@ -44,6 +46,7 @@
     padding: 6px;
     border-radius: 5px;
     width: 400px;
+    border: none;
 }
 
 .notes-upload-option{
