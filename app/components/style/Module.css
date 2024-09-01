@@ -18,6 +18,73 @@
     align-items: center;
 }
 
+.notes-upload{
+    background-color: coral;
+    padding: 6px;
+    border-radius: 8px;
+}
+
+.notes{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notes-detail{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.notes-detail input{
+    padding: 6px;
+    border-radius: 5px;
+    width: 400px;
+}
+
+.notes-upload-option{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+
+.notes-upload-option button{
+    background-color: red;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    width: fit-content;
+}
+
 .circle_down{
     font-size: larger;
+}
+
+@media (max-width: 800px){
+    .module{
+        font-size: 14px;
+    }
+
+    .notes{
+        flex-direction: column;
+        align-items: normal;
+    }
+
+    .notes-detail input{
+        font-size: 12px;
+        width: 100%;
+    }
+
+    .notes-upload-option input{
+        font-size: 12px;
+    }
+    
+    .notes-upload-option button{
+        font-size: 12px;
+    }
 }

@@ -32,7 +32,7 @@ function SideBar() {
         </div>
         :
         <div className="closed_side_bar" onClick={toggleSidebar}> 
-            <div> <GoSidebarExpand /> </div>
+            {/* <div> <GoSidebarExpand /> </div> */}
             <div className="icon" onClick={goToHome}> <MdHome /> </div>
             <div className="icon" onClick={goToNotes}> <FaBook/> </div>
             <div className="icon"> <IoIosStats /> </div>
