@@ -15,7 +15,7 @@ import { db } from "@/lib/firebase";
 const schema = z.object({
   facultyName: z.string().min(1, 'Faculty Name is required'),
   description: z.string().optional(),
-  pdf: z.any().refine((file) => file && file[0]?.type === 'application/pdf', 'PDF file is required'),
+  file: z.any().refine((file) => file && ['application/pdf', 'image/jpeg', 'image/png', 'application/zip', 'application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.presentationml.presentation'].includes(file[0]?.type), 'File type is not supported'),
 });
 
 function Page() {
@@ -37,7 +37,7 @@ function Page() {
     defaultValues: {
       facultyName: '',
       description: '',
-      pdf: null,
+      file: null,
     },
   });
 
@@ -57,18 +57,24 @@ function Page() {
       moduleNumber = parseInt(moduleNumber, 10);
 
       const storage = getStorage();
-      const storageRef = ref(storage, `notes/${courseCode}_${Date.now()}.pdf`);
+      const storageRef = ref(storage, `notes/${courseCode}_${Date.now()}_${data.file[0].name}`);
 
       try {
-        const compressedPdf = await compressPdfFile(data.pdf[0]);
-        await uploadBytes(storageRef, compressedPdf);
+        let fileToUpload;
+        if (data.file[0].type === 'application/pdf') {
+          fileToUpload = await compressPdfFile(data.file[0]);
+        } else {
+          fileToUpload = data.file[0];
+        }
+        
+        await uploadBytes(storageRef, fileToUpload);
 
         const downloadURL = await getDownloadURL(storageRef);
 
         const docData = {
           facultyName: data.facultyName,
           description: data.description,
-          pdfURL: downloadURL,
+          fileURL: downloadURL,
           courseCode: courseCode,
           moduleNumber: moduleNumber,
           user: {
@@ -131,8 +137,8 @@ function Page() {
             </div>
             <div className={styles.notes_upload_option}>
               <div className={styles.notes_input}>
-                <input type="file" accept="application/pdf" {...register('pdf')} />
-                {errors.pdf && <p>{errors.pdf.message}</p>}
+                <input type="file" accept=".pdf, .jpg, .jpeg, .png, .zip, .ppt, .pptx" {...register('file')} />
+                {errors.file && <p>{errors.file.message}</p>}
               </div>
               <button type="submit" disabled={loading}>Submit</button> {/* Disable submit button while loading */}
             </div>

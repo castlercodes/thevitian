@@ -21,7 +21,7 @@ function Note({ note }) {
                     handleDescription(note.description)
                 }}>{note.description}</div>
                 <div className="pdf_url">
-                    <a href={note.pdfURL} target="_blank" rel="noopener noreferrer">View PDF</a>
+                    <a href={note.fileURL} target="_blank" rel="noopener noreferrer">View PDF</a>
                 </div>
                 <div className="info-toggle" onClick={handleInfoClick}>
                     <FaInfoCircle />
