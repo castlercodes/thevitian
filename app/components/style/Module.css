@@ -14,56 +14,6 @@
     margin-bottom: 10px;
 }
 
-.module_heading:hover{
-    
-}
-
-
-.notes-upload{
-    border: 1px white solid;
-    padding: 6px;
-    border-radius: 8px;
-    background-color:rgb(36, 38, 39);
-}
-
-.notes{
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.notes-detail{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 5px;
-}
-
-.notes-detail input{
-    padding: 6px;
-    border-radius: 5px;
-    width: 400px;
-    border: none;
-}
-
-.notes-upload-option{
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-}
-
-
-.notes-upload-option button{
-    background-color: red;
-    border: none;
-    padding: 5px;
-    border-radius: 5px;
-    width: fit-content;
-}
-
 .circle_down{
     font-size: larger;
 }

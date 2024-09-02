@@ -1,0 +1,55 @@
+.note {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: rgb(34, 32, 32);
+    border-radius: 10px;
+    gap: 10px;
+}
+
+.note {
+    overflow: hidden; /* Prevent content from overflowing the container */
+    text-overflow: ellipsis; /* Optionally, add ellipsis for overflowing text */
+}
+
+.description {
+    font-style: italic;
+    overflow-wrap: break-word; /* Ensure long words or URLs break and wrap onto the next line */
+    word-break: break-word; /* Break long words to prevent overflow */
+}
+
+
+.note_detail{
+    display: flex;
+    justify-content: space-between;
+}
+
+.info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+.description {
+    font-style: italic;
+}
+
+.pdf_url {
+    color: blue;
+}
+
+@media (max-width: 800px) {
+    .note{
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    .pdf_url{
+        width: fit-content;
+    }
+
+    .info-toggle{
+        display: none;
+    }
+}
