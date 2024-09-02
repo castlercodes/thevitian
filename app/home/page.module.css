@@ -1,0 +1,50 @@
+.pageContainer {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.welcomeContainer {
+    margin-bottom: 20px;
+}
+
+.welcomeText {
+    font-size: 2.5rem;
+    font-weight: bold;
+    /* color: #333; */
+    animation: fadeIn 1s ease-in-out;
+}
+
+.description {
+    font-size: 1.1rem;
+    /* color: #555; */
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.imageContainer {
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Animation for the welcome text */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

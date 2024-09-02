@@ -15,7 +15,7 @@ async function fetchPosts() {
   } catch (error) {
     console.error("Error fetching posts:", error);
     return [];
-  }
+  } 
 }
 
 export default async function Feed() {
