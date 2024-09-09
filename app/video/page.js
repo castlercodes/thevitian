@@ -47,8 +47,10 @@ const Page = () => {
       };
 
       answerPC.ontrack = (event) => {
-        console.log('Receiving remote stream');
-        remoteVideoRef.current.srcObject = event.streams[0];
+        console.log('Receiving remote stream:', event.streams);
+        if (remoteVideoRef.current) {
+          remoteVideoRef.current.srcObject = event.streams[0];
+        }
       };
 
       await answerPC.setRemoteDescription(new RTCSessionDescription(offer));
@@ -98,6 +100,7 @@ const Page = () => {
       setPeerConnection(newPC);
 
       localStream.getTracks().forEach((track) => newPC.addTrack(track, localStream));
+      console.log('Local tracks added to peer connection.');
 
       newPC.onicecandidate = (event) => {
         if (event.candidate) {
@@ -110,8 +113,10 @@ const Page = () => {
       };
 
       newPC.ontrack = (event) => {
-        console.log('Receiving remote stream');
-        remoteVideoRef.current.srcObject = event.streams[0];
+        console.log('Receiving remote stream:', event.streams);
+        if (remoteVideoRef.current) {
+          remoteVideoRef.current.srcObject = event.streams[0];
+        }
       };
 
       const offer = await newPC.createOffer();
