@@ -86,6 +86,10 @@ const Page = () => {
   }, [peerConnection]);
 
   const startCall = async (targetSocketId) => {
+    if (!socket) {
+      console.error('Socket is not initialized.');
+      return;
+    }
     try {
       const localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
       localVideoRef.current.srcObject = localStream;
