@@ -15,9 +15,7 @@ const Page = () => {
   };
 
   useEffect(() => {
-    const newSocket = io('https://83fb-115-240-194-54.ngrok-free.app', {
-      transports: ['websocket']
-    });
+    const newSocket = io('https://83fb-115-240-194-54.ngrok-free.app');
 
     newSocket.on('connect', () => {
       console.log('Connected to WebSocket server with ID:', newSocket.id);
