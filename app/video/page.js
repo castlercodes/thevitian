@@ -15,7 +15,7 @@ const Page = () => {
   };
 
   useEffect(() => {
-    const newSocket = io('https://83fb-115-240-194-54.ngrok-free.app ', {
+    const newSocket = io('https://83fb-115-240-194-54.ngrok-free.app', {
       transports: ['websocket']
     });
 
