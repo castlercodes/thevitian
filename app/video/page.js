@@ -15,18 +15,17 @@ const Page = () => {
   };
 
   useEffect(() => {
-    const newSocket = io('https://83fb-115-240-194-54.ngrok-free.app', {
-      transports: ['websocket'] // Optional: Ensure WebSocket transport
+    const newSocket = io('https://83fb-115-240-194-54.ngrok-free.app ', {
+      transports: ['websocket']
     });
-    
 
     newSocket.on('connect', () => {
-      console.log('Connected to WebSocket server');
+      console.log('Connected to WebSocket server with ID:', newSocket.id);
     });
 
     newSocket.on('update-user-list', (users) => {
       console.log('Connected users:', users);
-      setConnectedUsers(users); // Exclude current user
+      setConnectedUsers(users.filter(user => user !== newSocket.id)); // Exclude current user
     });
 
     newSocket.on('offer', async (data) => {
@@ -76,6 +75,7 @@ const Page = () => {
 
     newSocket.on('disconnect', () => {
       console.log('Disconnected from WebSocket server');
+      setSocket(null);
     });
 
     setSocket(newSocket);
