@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useEffect, useRef, useState } from 'react';
 import io from 'socket.io-client';
 
@@ -15,21 +15,31 @@ const Page = () => {
   };
 
   useEffect(() => {
-    const newSocket = io('https://4cd0-115-240-194-54.ngrok-free.app');
-    setSocket(newSocket);
+    const newSocket = io('https://83fb-115-240-194-54.ngrok-free.app', {
+      transports: ['websocket'] // Optional: Ensure WebSocket transport
+    });
+    
+
+    newSocket.on('connect', () => {
+      console.log('Connected to WebSocket server');
+    });
 
     newSocket.on('update-user-list', (users) => {
-      setConnectedUsers(users.filter(user => user !== newSocket.id)); // Exclude current user
+      console.log('Connected users:', users);
+      setConnectedUsers(users); // Exclude current user
     });
 
     newSocket.on('offer', async (data) => {
+      console.log('Received offer from:', data.from);
       const { offer, from } = data;
       setRemoteSocketId(from);
 
       const answerPC = new RTCPeerConnection(iceServers);
       setPeerConnection(answerPC);
+
       answerPC.onicecandidate = (event) => {
         if (event.candidate) {
+          console.log('Sending ICE candidate');
           newSocket.emit('ice-candidate', {
             candidate: event.candidate,
             to: from
@@ -38,6 +48,7 @@ const Page = () => {
       };
 
       answerPC.ontrack = (event) => {
+        console.log('Receiving remote stream');
         remoteVideoRef.current.srcObject = event.streams[0];
       };
 
@@ -52,44 +63,61 @@ const Page = () => {
     });
 
     newSocket.on('answer', async (data) => {
+      console.log('Received answer');
       const { answer } = data;
       await peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
     });
 
     newSocket.on('ice-candidate', async (data) => {
+      console.log('Received ICE candidate');
       const { candidate } = data;
       await peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
     });
 
-    return () => newSocket.disconnect();
+    newSocket.on('disconnect', () => {
+      console.log('Disconnected from WebSocket server');
+    });
+
+    setSocket(newSocket);
+
+    return () => {
+      newSocket.disconnect();
+    };
   }, [peerConnection]);
 
   const startCall = async (targetSocketId) => {
-    const localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-    localVideoRef.current.srcObject = localStream;
+    try {
+      const localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+      localVideoRef.current.srcObject = localStream;
 
-    const newPC = new RTCPeerConnection(iceServers);
-    setPeerConnection(newPC);
+      const newPC = new RTCPeerConnection(iceServers);
+      setPeerConnection(newPC);
 
-    localStream.getTracks().forEach((track) => newPC.addTrack(track, localStream));
+      localStream.getTracks().forEach((track) => newPC.addTrack(track, localStream));
 
-    newPC.onicecandidate = (event) => {
-      if (event.candidate) {
-        socket.emit('ice-candidate', {
-          candidate: event.candidate,
-          to: targetSocketId
-        });
-      }
-    };
+      newPC.onicecandidate = (event) => {
+        if (event.candidate) {
+          console.log('Sending ICE candidate');
+          socket.emit('ice-candidate', {
+            candidate: event.candidate,
+            to: targetSocketId
+          });
+        }
+      };
 
-    newPC.ontrack = (event) => {
-      remoteVideoRef.current.srcObject = event.streams[0];
-    };
+      newPC.ontrack = (event) => {
+        console.log('Receiving remote stream');
+        remoteVideoRef.current.srcObject = event.streams[0];
+      };
 
-    const offer = await newPC.createOffer();
-    await newPC.setLocalDescription(offer);
+      const offer = await newPC.createOffer();
+      await newPC.setLocalDescription(offer);
 
-    socket.emit('offer', { offer, to: targetSocketId });
+      console.log('Sending offer to:', targetSocketId);
+      socket.emit('offer', { offer, to: targetSocketId });
+    } catch (err) {
+      console.error('Error starting call:', err);
+    }
   };
 
   return (
